@@ -1,0 +1,13 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+    Communication Enhamcement LLC
+{% endblock %}
+
+{% block content %}
+    <h2>Towers Home</h2>
+    <ul>
+        <li><a href="{% url 'towers_list' %}">Complete List</a></li>
+    </ul>
+{% endblock %}

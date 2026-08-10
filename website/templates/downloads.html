@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+    Communication Enhamcement LLC
+{% endblock %}
+
+{% block content %}
+    <img src="{% static 'website/Full-Tower.jpg' %}" alt="Tower">
+    <h2>Fild Downloads</h2>
+    <ul>
+        <li><a href="{% static 'website/Tenant Equipment Application Form.xlsx' %}">New Leases - Tenant Equipment Application Form</a></li>
+        <li><a href="{% static 'website/Tenant Equipment Modification Application Form.xlsx' %}">Existing Leases - Tenant Equipment Modification Application Form</a></li>
+        <li><a href="{% static 'website/DIRECT DEPOSIT CHANGE FORM.doc' %}">CE-LLC Property Owners / Landlords - Direct Deposit Change Form</a></li>
+        <li><a href="{% static 'website/CHANGE OF ADDRESS LANDLORD.doc' %}">CE-LLC Property Owners / Landlords - Change of Address Landlord</a></li>
+    </ul>
+    <h2>CE LLC Maintenance Request Form</h2>
+    <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <button type="submit">Send</button>
+    </form>
+{% endblock %}

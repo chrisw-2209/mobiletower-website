@@ -1,0 +1,30 @@
+{% load static %}
+{% load leaflet_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    {% block extra_head %}
+    {% endblock %}
+</head>
+
+<body>
+    <h1>Communication Enhancement LLC</h1>
+    <ul>
+        <a href="{% url 'index' %}"><img src="{% static 'website/ce-logo-header.png' %}" alt="Home"></a>
+        <a href="{% url 'towers' %}">Towers</a>
+        <a href="{% url 'downloads' %}">Downloads</a>
+        <a href="{% url 'collocation' %}">Collocation</a>
+        <a href="{% url 'about_us' %}">About Us</a>
+        <a href="{% url 'contact_us' %}">Contact Us</a>
+    </ul>
+    {% block content %}
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

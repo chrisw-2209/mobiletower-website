@@ -1,0 +1,82 @@
+{% extends "master.html" %}
+{% load static %}
+{% load leaflet_tags %}
+
+{% block title %}
+    Communication Enhamcement LLC
+{% endblock %}
+
+{% block extra_head %}
+    <style>
+        #map {
+            height: 500px;
+            width: 1000px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <h1>{{ site.site_name }}, {{ site.site_num }}</h1>
+    <h2>Information</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>Site #:</td>
+                <td>{{ site.site_num }}</td>
+            </tr>
+            <tr>
+                <td>Site Name:</td>
+                <td>{{ site.site_name }}</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>{{ site.address_street }}, {{ site.address_city }}, {{ site.address_county }}, {{ site.address_zip }}</td>
+            </tr>
+            <tr>
+                <td>Site Latitude:</td>
+                <td>{{ site.latitude }}</td>
+            </tr>
+            <tr>
+                <td>Site Longitude:</td>
+                <td>{{ site.longitude }}</td>
+            </tr>
+            <tr>
+                <td>Tower Height:</td>
+                <td>{{ site.height|floatformat:0 }}ft</td>
+            </tr>
+            <tr>
+                <td>Guyed Tower:</td>
+                <td>{{ site.structure }}</td>
+            </tr>
+            <tr>
+                <td>FRN Number:</td>
+                <td>{{ site.frn_num }}</td>
+            </tr>
+            <tr>
+                <td>FAA Study Number:</td>
+                <td>{{ site.faa_study_num }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Photos</h2>
+    {% for item in photos_for_page %}
+        <img src="{{ item.photo.image.url }}" alt="{{ item.name }}">
+        <p>{{ item.name }}</p>
+    {% endfor %}
+    <h2>Site Access Details</h2>
+    <p>For directions to this tower using Google Maps click <a href="https://www.google.com/maps/dir//{{ site.latitude }},{{ site.longitude }}" target="_blank">here</a></p>
+    <div id="map"></div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let latitude = {{ site.latitude }}
+        let longitude = {{ site.longitude }}
+        var map = L.map('map').setView([latitude, longitude], 7.5);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+        var marker = L.marker([latitude, longitude]).addTo(map);
+    </script>
+{% endblock %}
+
+

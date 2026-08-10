@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+    Communication Enhamcement LLC
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Site Name</th>
+                <th>Site Number</th>
+                <th>Street Address</th>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>County</th>
+                <th>FRN Number</th>
+                <th>FAA Study Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in sites %}
+            <tr>
+                <td><a href="{% url 'tower_page' site_name=site.site_name %}">{{ site.site_name }}</a></td>
+                <td>{{ site.site_num }}</td>
+                <td>{{ site.address_street }}</td>
+                <td>{{ site.address_city }}</td>
+                <td>{{ site.address_zip }}</td>
+                <td>{{ site.address_county }}</td>
+                <td>{{ site.frn_num }}</td>
+                <td>{{ site.faa_study_num }}</td>                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+db.sqlite3
+media/
+tower_photos/
+__pycache__/
+*.py[cod]
+.env
