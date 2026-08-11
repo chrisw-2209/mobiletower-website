@@ -7,6 +7,7 @@ class Site(models.Model):
     address_city = models.CharField(max_length=200)
     address_zip = models.IntegerField()
     address_county = models.CharField(max_length=200)
+    address_state = models.CharField(max_length=200)
     longitude = models.FloatField()
     latitude = models.FloatField()
     height = models.FloatField()

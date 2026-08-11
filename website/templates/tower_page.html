@@ -18,7 +18,11 @@
 
 {% block content %}
     <h1>{{ site.site_name }}, {{ site.site_num }}</h1>
+    <p><a href="{% url 'state_list' %}">States</a>><a href="{% url 'towers_bystate' address_state=site.address_state %}">{{ site.address_state }}</a>>{{ site.site_num }}</p>
     <h2>Information</h2>
+
+    
+
     <table>
         <tbody>
             <tr>
@@ -31,7 +35,7 @@
             </tr>
             <tr>
                 <td>Address:</td>
-                <td>{{ site.address_street }}, {{ site.address_city }}, {{ site.address_county }}, {{ site.address_zip }}</td>
+                <td>{{ site.address_street }}, {{ site.address_city }}, {{ site.address_county }},  {{ site.address_state }}, {{ site.address_zip }}</td>
             </tr>
             <tr>
                 <td>Site Latitude:</td>

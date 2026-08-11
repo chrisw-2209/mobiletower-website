@@ -6,7 +6,14 @@
 {% endblock %}
 
 {% block content %}
-    <table>
+
+
+{% if state %}
+<h2> {{ state }}</h2>
+<p><a href="{% url 'state_list' %}">States</a>>{{ state }}</p>
+{% endif %}
+
+<table>
         <thead>
             <tr>
                 <th>Site Name</th>

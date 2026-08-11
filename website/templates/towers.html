@@ -1,13 +1,44 @@
 {% extends "master.html" %}
 {% load static %}
+{% load leaflet_tags %}
 
 {% block title %}
     Communication Enhamcement LLC
+{% endblock %}
+
+{% block extra_head %}
+    <style>
+        #map {
+            height: 500px;
+            width: 1000px;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
     <h2>Towers Home</h2>
     <ul>
         <li><a href="{% url 'towers_list' %}">Complete List</a></li>
+        <li><a href="{% url 'state_list' %}">State List</a></li>
     </ul>
+    <div id="map"></div>
+{% endblock %}
+
+    
+
+{% block scripts %}
+    {{ sites|json_script:"sites-data" }}
+    <script>
+        const sites = JSON.parse(
+            document.getElementById("sites-data").textContent
+        );
+        let initial_latitude = 39.8333;
+        let initial_longitude = -98.5833;
+        var map = L.map('map').setView([initial_latitude, initial_longitude], 4);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+        for (const site of sites){
+            let popup_text = `<p>${site.site_name},${site.site_num}</p><p>Click <a href="/towers/towers-list/${site.site_name}/">here</a> for details</p>`;
+            var marker = L.marker([site.latitude, site.longitude]).addTo(map).bindPopup(popup_text);
+        }
+    </script>
 {% endblock %}

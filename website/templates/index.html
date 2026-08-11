@@ -1,15 +1,43 @@
 {% extends "master.html" %}
 {% load static %}
+{% load leaflet_tags %}
 
 {% block title %}
     Communication Enhamcement LLC
 {% endblock %}
 
+{% block extra_head %}
+    <style>
+        #map {
+            height: 500px;
+            width: 1000px;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <video autoplay loop muted>
         <source src="{% static 'website/Drone-Footage-Up-Tower.mp4' %}" type="video/mp4">
-    Your browser does nto support the video tag.
+    Your browser does not support the video tag.
     </video>
     <h2>Communication Enhancement LLC</h2>
     <p>Communication Enhancement, LLC is a privately held telecommunications tower company based in the Eastern United States. CE-LLC owns and operates 138 communication towers located across 24 states. Check out all of our sites below on the interactive map:</p>
+    <div id="map"></div>
+{% endblock %}
+
+{% block scripts %}
+    {{ sites|json_script:"sites-data" }}
+    <script>
+        const sites = JSON.parse(
+            document.getElementById("sites-data").textContent
+        );
+        let initial_latitude = 39.8333;
+        let initial_longitude = -98.5833;
+        var map = L.map('map').setView([initial_latitude, initial_longitude], 4);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+        for (const site of sites){
+            let popup_text = `<p>${site.site_name},${site.site_num}</p><p>Click <a href="/towers/towers-list/${site.site_name}/">here</a> for details</p>`;
+            var marker = L.marker([site.latitude, site.longitude]).addTo(map).bindPopup(popup_text);
+        }
+    </script>
 {% endblock %}
