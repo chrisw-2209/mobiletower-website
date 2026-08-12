@@ -2,34 +2,98 @@
 {% load static %}
 
 {% block title %}
-    Communication Enhamcement LLC
+    Communication Enhancement LLC
 {% endblock %}
 
 {% block content %}
-    <video autoplay loop muted>
-        <source src="{% static 'website/Drone-Footage-Around-Top-of-Tower.mp4' %}" type="video/mp4">
-    Your browser does nto support the video tag.
-    </video>
-    <h2>Contact Information</h2>
-    <ul>
-        <li>Contact: Property Management</li>
-        <li>Toll Free: 877-2355-522</li>
-        <li>Tel: 856-782-3700</li>
-        <li>Fax: 856-210-2616</li>
-        <li>Email: pm@ce-llc.com</li>
-    </ul>    
-    <h2>For All Other Inquiries</h2>
-    <ul>
-        <li>Property Management: <a href="mailto:tester@test.com">pm@ce-llc.com</a></li>
-        <li>Accounts Payable / CE-LLC Property Owners & Landlords: <a href="mailto:tester@test.com">ap@ce-llc.com</a></li>
-        <li>Property Management: <a href="mailto:tester@test.com">ar@ce-llc.com</a></li>
-    </ul>
-    <h2>Company Headquarters</h2>
-    <address>
-        Communication Enhancement LLC<br>
-        479 Centennial Boulevard<br>
-        Voorhees<br>
-        New Jersey<br>
-        08043
-    </address>
+
+<!-- Contact Information -->
+<section id="intro" class="wrapper style1">
+    <div class="title">Contact Us</div>
+
+    <div class="container">
+
+        <video autoplay loop muted playsinline style="width: 100%;">
+            <source
+                src="{% static 'website/Drone-Footage-Around-Top-of-Tower.mp4' %}"
+                type="video/mp4"
+            >
+            Your browser does not support the video tag.
+        </video>
+
+        <header class="style1">
+            <h2>Contact Information</h2>
+        </header>
+
+        <ul>
+            <li>Contact: Property Management</li>
+            <li>
+                Toll Free:
+                <a href="tel:8772355522">877-2355-522</a>
+            </li>
+            <li>
+                Tel:
+                <a href="tel:8567823700">856-782-3700</a>
+            </li>
+            <li>Fax: 856-210-2616</li>
+            <li>
+                Email:
+                <a href="mailto:pm@ce-llc.com">pm@ce-llc.com</a>
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+
+<!-- Other Inquiries -->
+<section class="wrapper style2">
+    <div class="title">Other Inquiries</div>
+
+    <div class="container">
+
+        <ul>
+            <li>
+                Property Management:
+                <a href="mailto:pm@ce-llc.com">
+                    pm@ce-llc.com
+                </a>
+            </li>
+
+            <li>
+                Accounts Payable / CE-LLC Property Owners &amp; Landlords:
+                <a href="mailto:ap@ce-llc.com">
+                    ap@ce-llc.com
+                </a>
+            </li>
+
+            <li>
+                Accounts Receivable:
+                <a href="mailto:ar@ce-llc.com">
+                    ar@ce-llc.com
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+
+<!-- Headquarters -->
+<section class="wrapper style3">
+    <div class="title">Company Headquarters</div>
+
+    <div class="container">
+
+        <address>
+            <strong>Communication Enhancement LLC</strong><br>
+            479 Centennial Boulevard<br>
+            Voorhees<br>
+            New Jersey<br>
+            08043
+        </address>
+
+    </div>
+</section>
+
 {% endblock %}

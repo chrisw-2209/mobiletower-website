@@ -2,15 +2,37 @@
 {% load static %}
 
 {% block title %}
-    Communication Enhamcement LLC
+    Communication Enhancement LLC
 {% endblock %}
 
 {% block content %}
-    <h1>States</h1>
-    <ul>
-    {% for state in states %}
-    <li><a href="{% url 'towers_bystate' address_state=state.address_state %}">{{ state.address_state }}</a></li>
-    {% endfor %}
-    </ul>
+
+<section id="main" class="wrapper style2">
+    <div class="title">States</div>
+
+    <div class="container">
+
+        <p>
+            Select a state to view all Communication Enhancement LLC
+            towers located there.
+        </p>
+
+        <div class="row aln-center">
+
+            {% for state in states %}
+                <div class="col-3 col-4-medium col-6-small">
+                    <a
+                        href="{% url 'towers_bystate' address_state=state.address_state %}"
+                        class="button fit"
+                    >
+                        {{ state.address_state }}
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
 
 {% endblock %}

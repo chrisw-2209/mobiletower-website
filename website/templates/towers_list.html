@@ -2,44 +2,66 @@
 {% load static %}
 
 {% block title %}
-    Communication Enhamcement LLC
+    Communication Enhancement LLC
 {% endblock %}
 
 {% block content %}
 
+<section id="main" class="wrapper style2">
+    <div class="title">
+        {% if state %}
+            {{ state }}
+        {% else %}
+            All Towers
+        {% endif %}
+    </div>
 
-{% if state %}
-<h2> {{ state }}</h2>
-<p><a href="{% url 'state_list' %}">States</a>>{{ state }}</p>
-{% endif %}
+    <div class="container">
 
-<table>
-        <thead>
-            <tr>
-                <th>Site Name</th>
-                <th>Site Number</th>
-                <th>Street Address</th>
-                <th>City</th>
-                <th>Zip Code</th>
-                <th>County</th>
-                <th>FRN Number</th>
-                <th>FAA Study Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for site in sites %}
-            <tr>
-                <td><a href="{% url 'tower_page' site_name=site.site_name %}">{{ site.site_name }}</a></td>
-                <td>{{ site.site_num }}</td>
-                <td>{{ site.address_street }}</td>
-                <td>{{ site.address_city }}</td>
-                <td>{{ site.address_zip }}</td>
-                <td>{{ site.address_county }}</td>
-                <td>{{ site.frn_num }}</td>
-                <td>{{ site.faa_study_num }}</td>                
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        {% if state %}
+            <p>
+                <a href="{% url 'state_list' %}">States</a>
+                &gt; {{ state }}
+            </p>
+        {% endif %}
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Site Name</th>
+                        <th>Site Number</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>Zip Code</th>
+                        <th>County</th>
+                        <th>FRN Number</th>
+                        <th>FAA Study Number</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for site in sites %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'tower_page' site_name=site.site_name %}">
+                                {{ site.site_name }}
+                            </a>
+                        </td>
+                        <td>{{ site.site_num }}</td>
+                        <td>{{ site.address_street }}</td>
+                        <td>{{ site.address_city }}</td>
+                        <td>{{ site.address_zip }}</td>
+                        <td>{{ site.address_county }}</td>
+                        <td>{{ site.frn_num }}</td>
+                        <td>{{ site.faa_study_num }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
 
 {% endblock %}

@@ -3,84 +3,177 @@
 {% load leaflet_tags %}
 
 {% block title %}
-    Communication Enhamcement LLC
+    Communication Enhancement LLC
 {% endblock %}
 
 {% block extra_head %}
     <style>
         #map {
             height: 500px;
-            width: 1000px;
+            width: 100%;
         }
     </style>
 {% endblock %}
 
-
 {% block content %}
-    <h1>{{ site.site_name }}, {{ site.site_num }}</h1>
-    <p><a href="{% url 'state_list' %}">States</a>><a href="{% url 'towers_bystate' address_state=site.address_state %}">{{ site.address_state }}</a>>{{ site.site_num }}</p>
-    <h2>Information</h2>
 
-    
+<!-- Tower Header -->
+<section id="intro" class="wrapper style1">
+    <div class="title">
+        {{ site.site_name }}
+    </div>
 
-    <table>
-        <tbody>
-            <tr>
-                <td>Site #:</td>
-                <td>{{ site.site_num }}</td>
-            </tr>
-            <tr>
-                <td>Site Name:</td>
-                <td>{{ site.site_name }}</td>
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td>{{ site.address_street }}, {{ site.address_city }}, {{ site.address_county }},  {{ site.address_state }}, {{ site.address_zip }}</td>
-            </tr>
-            <tr>
-                <td>Site Latitude:</td>
-                <td>{{ site.latitude }}</td>
-            </tr>
-            <tr>
-                <td>Site Longitude:</td>
-                <td>{{ site.longitude }}</td>
-            </tr>
-            <tr>
-                <td>Tower Height:</td>
-                <td>{{ site.height|floatformat:0 }}ft</td>
-            </tr>
-            <tr>
-                <td>Guyed Tower:</td>
-                <td>{{ site.structure }}</td>
-            </tr>
-            <tr>
-                <td>FRN Number:</td>
-                <td>{{ site.frn_num }}</td>
-            </tr>
-            <tr>
-                <td>FAA Study Number:</td>
-                <td>{{ site.faa_study_num }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <h2>Photos</h2>
-    {% for item in photos_for_page %}
-        <img src="{{ item.photo.image.url }}" alt="{{ item.name }}">
-        <p>{{ item.name }}</p>
-    {% endfor %}
-    <h2>Site Access Details</h2>
-    <p>For directions to this tower using Google Maps click <a href="https://www.google.com/maps/dir//{{ site.latitude }},{{ site.longitude }}" target="_blank">here</a></p>
-    <div id="map"></div>
+    <div class="container">
+        <p class="style1">
+            Site {{ site.site_num }}
+        </p>
+
+        <p>
+            <a href="{% url 'state_list' %}">States</a>
+            &gt;
+            <a href="{% url 'towers_bystate' address_state=site.address_state %}">
+                {{ site.address_state }}
+            </a>
+            &gt;
+            {{ site.site_num }}
+        </p>
+    </div>
+</section>
+
+
+<!-- Site Information -->
+<section id="main" class="wrapper style2">
+    <div class="title">Information</div>
+
+    <div class="container">
+
+        <div class="table-wrapper">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><strong>Site #</strong></td>
+                        <td>{{ site.site_num }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Site Name</strong></td>
+                        <td>{{ site.site_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address</strong></td>
+                        <td>
+                            {{ site.address_street }},
+                            {{ site.address_city }},
+                            {{ site.address_county }},
+                            {{ site.address_state }},
+                            {{ site.address_zip }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Site Latitude</strong></td>
+                        <td>{{ site.latitude }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Site Longitude</strong></td>
+                        <td>{{ site.longitude }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tower Height</strong></td>
+                        <td>{{ site.height|floatformat:0 }} ft</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Guyed Tower</strong></td>
+                        <td>{{ site.structure }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FRN Number</strong></td>
+                        <td>{{ site.frn_num }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FAA Study Number</strong></td>
+                        <td>{{ site.faa_study_num }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Photos -->
+<section class="wrapper style3">
+    <div class="title">Photos</div>
+
+    <div class="container">
+
+        {% for item in photos_for_page %}
+
+            <div class="image featured">
+                <img src="{{ item.photo.image.url }}" alt="{{ item.name }}">
+            </div>
+
+            <p>{{ item.name }}</p>
+
+        {% empty %}
+
+            <p>No photos are currently available for this site.</p>
+
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<!-- Site Access -->
+<section class="wrapper style2">
+    <div class="title">Site Access</div>
+
+    <div class="container">
+
+        <p>
+            For directions to this tower using Google Maps:
+        </p>
+
+        <ul class="actions special">
+            <li>
+                <a
+                    href="https://www.google.com/maps/dir//{{ site.latitude }},{{ site.longitude }}"
+                    target="_blank"
+                    class="button style3"
+                >
+                    Get Directions
+                </a>
+            </li>
+        </ul>
+
+        <div id="map"></div>
+
+    </div>
+</section>
+
 {% endblock %}
+
 
 {% block scripts %}
-    <script>
-        let latitude = {{ site.latitude }}
-        let longitude = {{ site.longitude }}
-        var map = L.map('map').setView([latitude, longitude], 7.5);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
-        var marker = L.marker([latitude, longitude]).addTo(map);
-    </script>
+<script>
+    let latitude = {{ site.latitude }};
+    let longitude = {{ site.longitude }};
+
+    var map = L.map('map').setView(
+        [latitude, longitude],
+        7.5
+    );
+
+    L.tileLayer(
+        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }
+    ).addTo(map);
+
+    var marker = L.marker(
+        [latitude, longitude]
+    ).addTo(map);
+</script>
 {% endblock %}
-
-

@@ -2,8 +2,118 @@
 {% load static %}
 
 {% block title %}
-    Communication Enhamcement LLC
+    Communication Enhancement LLC
 {% endblock %}
+
+{% block content %}
+
+<!-- Downloads -->
+<section id="intro" class="wrapper style1">
+    <div class="title">Downloads</div>
+
+    <div class="container">
+
+        <div class="image featured">
+            <img
+                src="{% static 'website/Full-Tower.jpg' %}"
+                alt="Communication tower"
+            >
+        </div>
+
+        <header class="style1">
+            <h2>Forms & Documents</h2>
+        </header>
+
+        <ul>
+            <li>
+                <a href="{% static 'website/Tenant Equipment Application Form.xlsx' %}">
+                    New Leases - Tenant Equipment Application Form
+                </a>
+            </li>
+
+            <li>
+                <a href="{% static 'website/Tenant Equipment Modification Application Form.xlsx' %}">
+                    Existing Leases - Tenant Equipment Modification Application Form
+                </a>
+            </li>
+
+            <li>
+                <a href="{% static 'website/DIRECT DEPOSIT CHANGE FORM.doc' %}">
+                    CE-LLC Property Owners / Landlords - Direct Deposit Change Form
+                </a>
+            </li>
+
+            <li>
+                <a href="{% static 'website/CHANGE OF ADDRESS LANDLORD.doc' %}">
+                    CE-LLC Property Owners / Landlords - Change of Address Landlord
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+
+<!-- Maintenance Request -->
+<section id="main" class="wrapper style2">
+    <div class="title">Maintenance Request</div>
+
+    <div class="container">
+
+        <header class="style1">
+            <h2>CE LLC Maintenance Request Form</h2>
+            <p>
+                Please complete the form below and we will respond to your request.
+            </p>
+        </header>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <ul class="actions special">
+                <li>
+                    <button type="submit" class="button style3">
+                        Send Request
+                    </button>
+                </li>
+            </ul>
+
+        </form>
+
+    </div>
+</section>
+
+
+<!-- Success Popup -->
+{% if messages %}
+    {% for message in messages %}
+        <div id="success-popup" class="success-popup">
+
+            <div class="success-popup-content">
+
+                <h3>Thank you!</h3>
+
+                <p>{{ message }}</p>
+
+                <button
+                    type="button"
+                    class="button style3"
+                    onclick="closePopup()"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
+
 
 {% block extra_head %}
     <style>
@@ -14,10 +124,10 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 9999;
         }
 
         .success-popup-content {
@@ -25,37 +135,19 @@
             padding: 30px;
             border-radius: 10px;
             text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        input[type="checkbox"] {
+            appearance: auto;
+            -webkit-appearance: checkbox;
+            opacity: 1;
+            position: static;
+            margin-right: 0.5em;
         }
     </style>
 {% endblock %}
 
-{% block content %}
-    <img src="{% static 'website/Full-Tower.jpg' %}" alt="Tower">
-    <h2>Fild Downloads</h2>
-    <ul>
-        <li><a href="{% static 'website/Tenant Equipment Application Form.xlsx' %}">New Leases - Tenant Equipment Application Form</a></li>
-        <li><a href="{% static 'website/Tenant Equipment Modification Application Form.xlsx' %}">Existing Leases - Tenant Equipment Modification Application Form</a></li>
-        <li><a href="{% static 'website/DIRECT DEPOSIT CHANGE FORM.doc' %}">CE-LLC Property Owners / Landlords - Direct Deposit Change Form</a></li>
-        <li><a href="{% static 'website/CHANGE OF ADDRESS LANDLORD.doc' %}">CE-LLC Property Owners / Landlords - Change of Address Landlord</a></li>
-    </ul>
-    <h2>CE LLC Maintenance Request Form</h2>
-    {% if messages %}
-        {% for message in messages %}
-            <div id="success-popup" class="success-popup">
-                <div class="success-popup-content">
-                    <h3>Thank you!</h3>
-                    <p>{{ message }}</p>
-                    <button onclick="closePopup()">Close</button>
-                </div>
-            </div>
-        {% endfor %}
-    {% endif %}
-        <form method="post">
-         {% csrf_token %}
-         {{ form.as_p }}
-         <button type="submit">Send</button>
-    </form>
-{% endblock %}
 
 {% block scripts %}
     <script>
