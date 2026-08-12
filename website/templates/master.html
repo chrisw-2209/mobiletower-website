@@ -12,6 +12,12 @@
     {% leaflet_js %}
     {% leaflet_css %}
     {% block extra_head %}
+    <style>
+    #logo img {
+        max-width: 300px;
+        height: auto;
+    }
+    </style>
     {% endblock %}
 </head>
 
@@ -21,13 +27,14 @@
 
         <!-- Header -->
         <section id="header" class="wrapper">
-
-            <div id="logo">
-                <h1>
-                    <a href="{% url 'index' %}">Communication Enhancement LLC</a>
-                </h1>
-                <p>Communication Tower Management</p>
-            </div>
+        <div id="logo">
+            <h1>
+                <a href="{% url 'index' %}">
+                    Communication Enhancement LLC
+                </a>
+            </h1>
+            <p>Communication Tower Management</p>
+        </div>
 
             <nav id="nav">
                 <ul>
