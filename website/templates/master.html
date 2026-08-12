@@ -5,32 +5,76 @@
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{% static 'website/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/fontawesome-all.min.css' %}">
     {% leaflet_js %}
     {% leaflet_css %}
     {% block extra_head %}
     {% endblock %}
 </head>
 
-<body>
-    <h1>Communication Enhancement LLC</h1>
-    <ul>
-        <a href="{% url 'index' %}"><img src="{% static 'website/ce-logo-header.png' %}" alt="Home"></a>
-        <a href="{% url 'towers' %}">Towers</a>
-        <a href="{% url 'downloads' %}">Downloads</a>
-        <a href="{% url 'collocation' %}">Collocation</a>
-        <a href="{% url 'about_us' %}">About Us</a>
-        <a href="{% url 'contact_us' %}">Contact Us</a>
-    </ul>
-    {% block content %}
-    {% endblock %}
+<body class="homepage is-preload">
+
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <section id="header" class="wrapper">
+
+            <div id="logo">
+                <h1>
+                    <a href="{% url 'index' %}">Communication Enhancement LLC</a>
+                </h1>
+                <p>Communication Tower Management</p>
+            </div>
+
+            <nav id="nav">
+                <ul>
+                    <li>
+                        <a href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'towers' %}">Towers</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'downloads' %}">Downloads</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'collocation' %}">Collocation</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'about_us' %}">About Us</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contact_us' %}">Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </section>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer>
+            <ul>
+                <li>© 2026 Communication Enhancement LLC. All Rights Reserved</li>
+                <li>Website designed by Chris using HTML5 UP</li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <script src="{% static 'website/js/jquery.min.js' %}"></script>
+    <script src="{% static 'website/js/jquery.dropotron.min.js' %}"></script>
+    <script src="{% static 'website/js/browser.min.js' %}"></script>
+    <script src="{% static 'website/js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'website/js/util.js' %}"></script>
+    <script src="{% static 'website/js/main.js' %}"></script>
     {% block scripts %}
     {% endblock %}
-    <footer>
-        <ul>
-            <li>© 2026 Communication Enhancement LLC. All Rights Reserved</li>
-            <li>Developed By Chris</li>
-        </ul>
-    </footer>
+
 </body>
 
 </html>
